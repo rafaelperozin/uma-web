@@ -1,6 +1,8 @@
+import { observer } from 'mobx-react-lite';
 import { Navigate, Outlet } from 'react-router-dom';
+import { useStore } from '../constexts/store.context';
 
-export const ProtectedRoute = () => {
-  const isAuthenticated = false; // TODO: Implement the authentication logic
+export const ProtectedRoute = observer(() => {
+  const { user: { isAuthenticated } } = useStore();
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
-};
+});

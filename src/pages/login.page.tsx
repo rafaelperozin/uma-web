@@ -7,7 +7,7 @@ export const LoginPage = observer(() => {
     <>
       <h1>Login Page</h1>
       <p>Welcome to the login page</p>
-      <p>{isAuthenticated ? 'You are authenticated' : 'You are not authenticated'}</p>
+      <p>{isAuthenticated ? '√ You are authenticated' : 'You are not authenticated'}</p>
       <button onClick={() => setIsAuthenticated(true)}>Authenticate</button>
     </>
   )

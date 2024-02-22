@@ -1,0 +1,41 @@
+/**
+  * important: This is a core styles and it should never change.
+  */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+	scroll-behavior: smooth;
+	width: 100%;
+	margin: 0 auto;
+  background-color: $primary-color;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+	margin: 0;
+}

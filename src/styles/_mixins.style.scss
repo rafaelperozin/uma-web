@@ -1,0 +1,27 @@
+/**
+  * important: This is a core styles and it should never change.
+  */
+
+/** FLEX
+  * note: usage: @include flex(direction_value, justify_value, align_value, wrap_value);
+  * If you would not like to set a property you can use "unset" as a value.
+  */
+@mixin flex($direction, $justify, $align, $wrap) {
+	display: flex;
+
+	@if ($direction !=unset) {
+		flex-direction: $direction;
+	}
+
+	@if ($justify !=unset) {
+		justify-content: $justify;
+	}
+
+	@if ($align !=unset) {
+		align-items: $align;
+	}
+
+	@if ($wrap !=unset) {
+		flex-wrap: $wrap;
+	}
+}

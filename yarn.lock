@@ -1490,7 +1490,7 @@
   dependencies:
     "queue-microtask" "^1.2.2"
 
-"sass@*":
+"sass@*", "sass@^1.71.1":
   "integrity" "sha512-wovtnV2PxzteLlfNzbgm1tFXPLoZILYAMJtvoXXkD7/+1uP41eKkIt1ypWq5/q2uT94qHjXehEYfmjKOvjL9sg=="
   "resolved" "https://registry.npmjs.org/sass/-/sass-1.71.1.tgz"
   "version" "1.71.1"

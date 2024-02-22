@@ -1,0 +1,17 @@
+/** CORE STYLES
+  * IMPORTANT: DON'T remove any style, and DON'T change the sort order.
+  * The order of the styles is important to avoid conflicts and to keep the code organized.
+  */
+@import 'colors.style';
+@import 'variables.style';
+@import 'functions.style';
+@import 'mixins.style';
+@import 'typography.style';
+@import 'breakpoint.style';
+@import 'alignment.style';
+@import 'reset.style';
+
+// LAYOUT
+@import './../layouts/default.style';
+
+// COMPONENTS

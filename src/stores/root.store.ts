@@ -1,13 +1,14 @@
-import { Instance, applySnapshot, getSnapshot, types } from "mobx-state-tree";
+import { applySnapshot, getSnapshot, Instance, types } from 'mobx-state-tree';
+
 import { UserStore, userStore } from './user.store';
 
 export type RootStoreType = Instance<typeof RootStore>;
 
 export const RootStore = types
-  .model("RootStore", {
-    user: UserStore,
+  .model('RootStore', {
+    user: UserStore
   })
-  .actions((self) => {
+  .actions(self => {
     let initialState = {};
     return {
       afterCreate: () => {
@@ -15,13 +16,13 @@ export const RootStore = types
       },
       reset: () => {
         applySnapshot(self, initialState);
-      },
+      }
     };
   });
 
 export const createStore = () =>
   RootStore.create({
-    user: userStore,
+    user: userStore
   });
 
 export const rootStore = createStore();

@@ -1,7 +1,7 @@
-import {ReactNode, useContext, useEffect, useState} from 'react';
-import {createContext} from 'react';
-import { RootStoreType, rootStore } from '../stores/root.store';
 import persist from 'mst-persist';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+
+import { rootStore, RootStoreType } from '../stores/root.store';
 
 const StoreContext = createContext<RootStoreType | undefined>(undefined);
 
@@ -18,7 +18,7 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
       if (window.localStorage) {
         persist('all', rootStore, {
           storage: localStorage,
-          jsonify: true,
+          jsonify: true
         }).then(() => {
           rootStore.afterCreate();
           setIsLoaded(true);
@@ -30,10 +30,14 @@ export const StoreProvider = ({ children }: StoreProviderProps) => {
   };
 
   useEffect(() => {
-		checkLocalStorageAvailability();
-	}, []);
+    checkLocalStorageAvailability();
+  }, []);
 
-  return isLoaded ? <StoreContext.Provider value={rootStore}>{children}</StoreContext.Provider> : <></>;
+  return isLoaded ? (
+    <StoreContext.Provider value={rootStore}>{children}</StoreContext.Provider>
+  ) : (
+    <></>
+  );
 };
 
 export const useStore = () => useContext(StoreContext) as RootStoreType;

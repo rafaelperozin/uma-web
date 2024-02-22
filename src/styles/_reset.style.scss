@@ -13,7 +13,7 @@ body {
 	scroll-behavior: smooth;
 	width: 100%;
 	margin: 0 auto;
-  background-color: $primary-color;
+  background-color: $light-gray;
 }
 
 #root {
@@ -38,4 +38,10 @@ blockquote,
 dl,
 dd {
 	margin: 0;
+}
+
+ul[class],
+ol[class] {
+	list-style: none;
+	padding: 0;
 }

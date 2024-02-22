@@ -1,0 +1,17 @@
+.navigation {
+  @include flex(column, space-between, center, unset);
+
+  &__item {
+    margin-bottom: 1rem;
+    a {
+      color: $white;
+
+      &:active {
+        color: $white;
+      }
+      &:hover {
+        color: $secondary-color
+      }
+    }
+  }
+}

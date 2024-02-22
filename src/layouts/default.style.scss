@@ -1,3 +1,36 @@
-header {
-  background-color: aqua;
+.container {
+  background-color: $primary-color;
+  padding: 1rem 1rem 1rem 0;
+  min-width: 60%;
+  min-height: 70%;
+  @include flex('row', unset, unset, unset);
+
+  &__left-bar {
+    background-color: $secondary-color;
+    position: relative;
+    width: 20px;
+  }
+
+  &__header {
+    width: 450px;
+    padding: 1rem;
+    @include flex(column, center, center, unset);
+    flex-grow: 1;
+  }
+
+  &__main {
+    background-color: $secondary-color;
+  }
+}
+
+.header {
+  color: $white;
+
+  &__title {
+    margin-bottom: 1rem;
+  }
+
+  &__text {
+    margin-bottom: 3rem;
+  }
 }

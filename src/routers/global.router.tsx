@@ -1,11 +1,11 @@
 import { LoginPage } from '../pages/login.page';
-import { RegisterPage } from '../pages/register.page';
 import { HomePage } from '../pages/home.page';
 import { ProfilePage } from '../pages/profile.page';
 import { Route, Routes } from 'react-router-dom';
 import { NotFoundPage } from '../pages/not-found.page';
 import { ProtectedRoute } from './protected.route';
 import { Layout } from '../layouts/default.layout';
+import { RegisterPage } from '../pages/register/register.page';
 
 export const GlobalRouter = () => {
   return (

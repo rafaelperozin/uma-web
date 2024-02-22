@@ -1,0 +1,36 @@
+.form {
+  &__section-title {
+    margin-top: 1rem;
+  }
+
+  &__section-text {
+    margin-bottom: 1.5rem;
+  }
+
+  &__input {
+    border: none;
+    margin: .5rem 0;
+    padding: .6rem;
+    border-radius: .3rem;
+    width: 100%;
+  }
+
+  input.form__input {
+    &--error {
+      border: 2px solid $error-color;
+    }
+  }
+  
+  &__error {
+    color: $error-color;
+    display: block;
+    margin-bottom: 1rem;
+    @extend .txt-bold;
+  }
+
+  &__button {
+    &--primary {
+      margin: 4rem 0 0 auto;
+    }
+  }
+}

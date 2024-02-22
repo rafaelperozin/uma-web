@@ -1,0 +1,44 @@
+.button {
+  display: block;
+  margin: 1rem 0;
+  cursor: pointer;
+  
+  &--primary {
+    padding: .5rem 3rem;
+    border: none;
+    border-radius: .3rem;
+    background-color: $primary-color;
+    color: $white;
+    @extend .txt-l;
+    @extend .txt-bold;
+    @extend .txt-uppercase;
+    margin-top: 3rem;
+
+    &:hover {
+      background-color: $primary-color-hover;
+    }
+
+    &:active {
+      background-color: $primary-color-active;
+    }
+  }
+
+  &--secondary {
+    padding: .3rem 2rem;
+    border: 1px solid $primary-color;
+    border-radius: .3rem;
+    background-color: transparent;
+    color: $primary-color;
+    @extend .txt-s;
+
+    &:hover {
+      background-color: $primary-color-hover;
+      color: $white;
+    }
+
+    &:active {
+      background-color: $primary-color-active;
+      color: $white;
+    }
+  }
+}

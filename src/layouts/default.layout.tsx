@@ -4,7 +4,7 @@ import { NavBar } from '../components/Navigation/NavBar'
 export const Layout = () => {
   return (
     <>
-      <div className='container'>
+      <div className='container default-theme'>
         <div className='container__left-bar'></div>
         <header className='container__header header'>
           <h1 className='header__title txt-xxl txt-bold txt-uppercase'>{'Welcome'}</h1>

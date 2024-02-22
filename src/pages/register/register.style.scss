@@ -1,0 +1,27 @@
+
+.register {
+  &__title {
+    line-height: .7;
+    margin-bottom: .7rem;
+  }
+
+  &__text {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.photo-field {
+  @include flex(column, center, flex-start, unset);
+  margin-top: 1rem;
+
+  &__input {
+    &--file {
+      border: 1px solid $white;
+    }
+  }
+
+  &__preview {
+    margin: .2rem 0;
+    width: 120px;
+  }
+}

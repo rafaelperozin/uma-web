@@ -1,7 +1,7 @@
 import { RegisterOptions } from 'react-hook-form';
 import { RegisterInputs } from '../models/register.model';
 
-type FieldOptions = RegisterOptions & { type: string };
+type FieldOptions = RegisterOptions & { type: string, placeholder: string};
 type ReducedInputs = Omit<RegisterInputs, 'photos' | 'photoNames'>;
 type FormRules = {
   [K in keyof ReducedInputs]: FieldOptions;
@@ -12,23 +12,27 @@ export const fileSizeIsAllowed = (size: number): boolean | string => size < 1048
 
 export const formRules: FormRules = {
   firstName: {
+    placeholder: 'First name',
     type: 'text',
     required: 'The firstName is required',
     minLength: { value: 2, message: 'First name must be at least 2 characters' },
     maxLength: { value: 25, message: 'First name cannot exceed 25 characters' }
   },
   lastName: {
+    placeholder: 'Last name',
     type: 'text',
     required: 'The lastName is required',
     minLength: { value: 2, message: 'Last name must be at least 2 characters' },
     maxLength: { value: 25, message: 'Last name cannot exceed 25 characters' }
   },
   email: {
+    placeholder: 'Email',
     type: 'email',
     required: 'The email is required',
     pattern: { value: /^\S+@\S+$/i, message: 'Invalid email format' }
   },
   password: {
+    placeholder: 'Password',
     type: 'password',
     required: 'The password is required',
     minLength: { value: 6, message: 'Password must be at least 6 characters' },
@@ -36,6 +40,7 @@ export const formRules: FormRules = {
     pattern: { value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/, message: 'Password must be alphanumeric' }
   },
   confirmPassword: {
+    placeholder: 'Confirm password',
     type: 'password',
     required: 'The confirmPassword is required',
     validate: (value, { password }) =>

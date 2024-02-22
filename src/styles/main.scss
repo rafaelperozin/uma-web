@@ -9,10 +9,17 @@
 @import 'typography.style';
 @import 'breakpoint.style';
 @import 'alignment.style';
+
+// THEME
 @import 'reset.style';
+@import './theme/form.style';
+@import './theme/button.style';
 
 // LAYOUT
 @import './../layouts/default.style';
+
+// PAGES
+@import './../pages/register/register.style';
 
 // COMPONENTS
 @import './../components/Navigation/navbar.style';

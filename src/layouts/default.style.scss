@@ -1,9 +1,12 @@
 .container {
   background-color: $primary-color;
   padding: 1rem 1rem 1rem 0;
-  min-width: 60%;
+  min-width: 70%;
+  max-width: 70%;
   min-height: 70%;
+  max-height: 70%;
   @include flex('row', unset, unset, unset);
+  color: $primary-color;
 
   &__left-bar {
     background-color: $secondary-color;
@@ -20,6 +23,9 @@
 
   &__main {
     background-color: $secondary-color;
+    padding: 4rem 5rem;
+    overflow-y: auto;
+    min-width: 450px;
   }
 }
 

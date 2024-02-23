@@ -2,6 +2,7 @@ import { cast, flow, Instance, types } from 'mobx-state-tree';
 
 import { Photo } from '../models/user.model';
 import { createUserAction } from './user/actions/create-user.action';
+import { getUserAction } from './user/actions/get-user.action';
 import { loginAction } from './user/actions/login.action';
 import { setUserAction } from './user/actions/set-user.action';
 import { setUserAuthenticationAction } from './user/actions/set-user-authentication.action';
@@ -30,23 +31,34 @@ export const UserStore = types
     setRole: (role: string) => (self.role = role),
     setIsActive: (isActive: boolean) => (self.isActive = isActive),
     setAvatar: (avatar: string) => (self.avatar = avatar),
-    setCreatedAt: (createdAt: Date) => (self.createdAt = createdAt),
-    setUpdatedAt: (updatedAt: Date) => (self.updatedAt = updatedAt),
-    setId: (id: number) => (self.id = id),
+    setCreatedAt: (createdAt: Date | undefined) => (self.createdAt = createdAt),
+    setUpdatedAt: (updatedAt: Date | undefined) => (self.updatedAt = updatedAt),
+    setId: (id: number | undefined) => (self.id = id),
     setPhotos: (photos: Photo[]) => (self.photos = cast(photos))
   }))
   .actions(self => ({
     setUser: setUserAction(self),
     setUserAuthentication: setUserAuthenticationAction(self),
     unsetUserAuthentication: () => {
+      // TODO: abstract this to user/actions
       self.setEmail('');
       self.setIsAuthenticated(false);
       self.setUserToken('');
+      self.setFirstName('');
+      self.setLastName('');
+      self.setRole('');
+      self.setIsActive(false);
+      self.setAvatar('');
+      self.setCreatedAt(undefined);
+      self.setUpdatedAt(undefined);
+      self.setId(undefined);
+      self.setPhotos([]);
     }
   }))
   .actions(self => ({
     createUser: flow(createUserAction(self)),
-    login: flow(loginAction(self))
+    login: flow(loginAction(self)),
+    getUser: flow(getUserAction(self))
   }))
   .views(self => ({
     get fullName() {

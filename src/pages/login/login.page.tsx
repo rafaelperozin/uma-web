@@ -18,12 +18,13 @@ export const LoginPage = observer(() => {
     formState: { errors }
   } = useForm<LoginInputs>();
   const {
-    user: { fullName, isAuthenticated, unsetUserAuthentication, login }
+    user: { isAuthenticated, unsetUserAuthentication, login, getUser }
   } = useStore();
   const [loginStatus, setLoginStatus] = useState<RequestResponse | null>(null);
 
   const onSubmitForm = async (data: LoginInputs) => {
     const response = await login(data);
+    await getUser(); // gets and save the user data
     setLoginStatus(response);
   };
 
@@ -38,7 +39,7 @@ export const LoginPage = observer(() => {
       <h1 className="login__title txt-xxl text-bold">{'Login'}</h1>
       {isAuthenticated ? (
         <>
-          <p className="login__text txt-m">{`Welcome, ${fullName}.`}</p>
+          <p className="login__text txt-m">{`√ You are authenticated.`}</p>
           <button
             type="submit"
             className="button button--secondary form__button form__button--secondary"

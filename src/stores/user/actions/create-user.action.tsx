@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from 'axios';
 
 import apiConnect, { headersMultipart } from '../../../api/connect.api';
-import { CreateUserRequest } from '../../../models/user.model';
+import { CreateUserRequest, UserResponse } from '../../../models/user.model';
 
 export const createUserAction = (self: any) =>
   function* (user: CreateUserRequest) {
@@ -20,7 +20,7 @@ export const createUserAction = (self: any) =>
         }
       });
 
-      const response: AxiosResponse = yield apiConnect.post(
+      const response: AxiosResponse<UserResponse> = yield apiConnect.post(
         '/user/register',
         formData,
         headersMultipart

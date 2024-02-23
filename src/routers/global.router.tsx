@@ -4,7 +4,7 @@ import { Layout } from '../layouts/default.layout';
 import { HomePage } from '../pages/home.page';
 import { LoginPage } from '../pages/login/login.page';
 import { NotFoundPage } from '../pages/not-found.page';
-import { ProfilePage } from '../pages/profile.page';
+import { ProfilePage } from '../pages/profile/profile.page';
 import { RegisterPage } from '../pages/register/register.page';
 import { ProtectedRoute } from './protected.route';
 

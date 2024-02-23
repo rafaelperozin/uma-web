@@ -16,8 +16,10 @@ instance.defaults.headers.post['Content-Type'] = 'application/json';
 instance.interceptors.request.use(config => {
   const { user } = rootStore;
 
+  console.log('user.isAuthenticated', user.isAuthenticated);
+  console.log('config.headers', config.headers);
   if (user.isAuthenticated && config.headers) {
-    config.headers['Authorization'] = user.userToken;
+    config.headers['Authorization'] = `Bearer ${user.userToken}`;
   }
 
   return config;

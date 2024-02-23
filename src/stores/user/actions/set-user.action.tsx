@@ -1,7 +1,8 @@
-import { CreateUserResponse } from '../../../models/user.model';
+import { UserResponse } from '../../../models/user.model';
 
 export const setUserAction = (self: any) =>
-  function (data: CreateUserResponse) {
+  function (data: UserResponse) {
+    console.log('setUserAction', data);
     self.setEmail(data.email);
     self.setFirstName(data.firstName);
     self.setLastName(data.lastName);

@@ -7,7 +7,7 @@ export interface Photo {
   updatedAt: Date;
 }
 
-export interface CreateUserResponse {
+export interface UserResponse {
   id: number;
   email: string;
   firstName: string;

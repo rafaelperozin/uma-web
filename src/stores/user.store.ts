@@ -1,8 +1,10 @@
 import { cast, flow, Instance, types } from 'mobx-state-tree';
 
-import { CreateUserResponse, Photo } from '../models/user.model';
+import { Photo } from '../models/user.model';
 import { createUserAction } from './user/actions/create-user.action';
+import { loginAction } from './user/actions/login.action';
 import { setUserAction } from './user/actions/set-user.action';
+import { setUserAuthenticationAction } from './user/actions/set-user-authentication.action';
 
 export const UserStore = types
   .model('UserStore', {
@@ -34,11 +36,8 @@ export const UserStore = types
     setPhotos: (photos: Photo[]) => (self.photos = cast(photos))
   }))
   .actions(self => ({
-    setUser: (data: CreateUserResponse) => setUserAction(data),
-    setUserAuthentication: (token: string) => {
-      self.setIsAuthenticated(true);
-      self.setUserToken(token);
-    },
+    setUser: setUserAction(self),
+    setUserAuthentication: setUserAuthenticationAction(self),
     unsetUserAuthentication: () => {
       self.setEmail('');
       self.setIsAuthenticated(false);
@@ -46,22 +45,13 @@ export const UserStore = types
     }
   }))
   .actions(self => ({
-    createUser: flow(createUserAction(self))
-    // fetchUser: flow(function* () {
-    //   return yield axios.get(
-    //     `${process.env.REACT_APP_RANDOM_USERS_API}/?inc=name,picture`
-    //   );
-    // }),
-    // login: flow(function* (email: string, password: string) {
-    //   const response = yield axios.post(
-    //     `${process.env.REACT_APP_API}/auth/login`,
-    //     {
-    //       email,
-    //       password,
-    //     }
-    //   );
-    //   return response.data;
-    // }),
+    createUser: flow(createUserAction(self)),
+    login: flow(loginAction(self))
+  }))
+  .views(self => ({
+    get fullName() {
+      return `${self.firstName} ${self.lastName}`;
+    }
   }));
 
 export const userStore = UserStore.create({});

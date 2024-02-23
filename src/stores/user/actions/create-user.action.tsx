@@ -5,7 +5,6 @@ import { CreateUserRequest } from '../../../models/user.model';
 
 export const createUserAction = (self: any) =>
   function* (user: CreateUserRequest) {
-    console.log('user', user);
     try {
       const formData = new FormData();
 

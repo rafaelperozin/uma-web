@@ -1,4 +1,9 @@
 .login {
+  &__title {
+    line-height: .7;
+    margin-bottom: .7rem;
+  }
+
   &__text {
     margin-bottom: 1.5rem;
   }

@@ -4,7 +4,7 @@ import { RegisterInputs } from '../models/register.model';
 
 type FieldOptions = RegisterOptions & { type: string; placeholder: string };
 type ReducedInputs = Omit<RegisterInputs, 'photos' | 'photoNames'>;
-type FormRules = {
+export type FormRules = {
   [K in keyof ReducedInputs]: FieldOptions;
 };
 

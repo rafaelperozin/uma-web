@@ -16,25 +16,21 @@ export const RegisterPage = observer(() => {
     formState: { errors }
   } = useForm<RegisterInputs>();
   const {
-    user: { createUser }
+    user: { fullName, isAuthenticated, createUser }
   } = useStore();
   const [photoFields, setPhotoFields] = useState([{ id: uuidv4() }]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [registerStatus, setRegisterStatus] = useState<RequestResponse | null>(null);
 
   const onSubmitForm: SubmitHandler<RegisterInputs> = async data => {
-    console.log('data', data);
     const photoArray: File[] = Object.keys(data.photos).map(key => data.photos[key][0]);
-    console.log('photoArray', photoArray);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPassword, ...dataSanitised } = data;
     const finalData: CreateUserRequest = { ...dataSanitised, photos: photoArray };
 
-    console.log('finalData', finalData);
     const response = await createUser(finalData);
     setRegisterStatus(response);
-    console.log(response);
   };
 
   const handleAddPhoto = () => photoFields && setPhotoFields([...photoFields, { id: uuidv4() }]);
@@ -107,7 +103,6 @@ export const RegisterPage = observer(() => {
                   return index === 0 && !value[0] ? 'The photo is required' : true;
                 },
                 checkFileType: (value: FileList) => {
-                  console.log('value', value);
                   return value[0] ? fileTypeIsAllowed(value[0].type) : true;
                 },
                 checkFileSize: (value: FileList) => {
@@ -134,7 +129,16 @@ export const RegisterPage = observer(() => {
   ) : (
     <div className="register">
       <h1 className="register__title txt-xxl text-bold">{'Register'}</h1>
-      <p className="register__text txt-m">{'Enter your details to register.'}</p>
+      {isAuthenticated ? (
+        <>
+          <p className="register__text txt-m">
+            {`${fullName}, you are already registered.`}
+            <span>{'Enter the details to register a new user.'}</span>
+          </p>
+        </>
+      ) : (
+        <p className="register__text txt-m">{'Enter your details to register.'}</p>
+      )}
       <form className="form" onSubmit={handleSubmit(onSubmitForm)}>
         {renderFormFields()}
         <h3 className="form__section-title txt-xl txt-bold">{'Photos'}</h3>

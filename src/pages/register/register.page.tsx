@@ -7,7 +7,6 @@ import { useStore } from '../../contexts/store.context';
 import { RequestResponse } from '../../models/error.model';
 import { RegisterInputs } from '../../models/register.model';
 import { CreateUserRequest } from '../../models/user.model';
-// import { CreateUserRequest } from '../../models/user.model';
 import { fileSizeIsAllowed, fileTypeIsAllowed, formRules } from '../../utils/form-rules.util';
 
 export const RegisterPage = observer(() => {
@@ -60,6 +59,7 @@ export const RegisterPage = observer(() => {
     setPreviewUrls(newPreviewUrls);
   };
 
+  // TODO: abstract this to a component later on
   const renderFormFields = () =>
     Object.keys(formRules).map((key: string) => {
       const field = key as keyof typeof formRules;
@@ -80,6 +80,7 @@ export const RegisterPage = observer(() => {
       );
     });
 
+  // TODO: abstract this to a component later on
   const renderPhotoFields = () =>
     photoFields.map((field, index) => {
       const error = errors.photos && errors.photos[`photo${index + 1}`];
@@ -134,7 +135,7 @@ export const RegisterPage = observer(() => {
     <div className="register">
       <h1 className="register__title txt-xxl text-bold">{'Register'}</h1>
       <p className="register__text txt-m">{'Enter your details to register.'}</p>
-      <form className="default-theme__form form" onSubmit={handleSubmit(onSubmitForm)}>
+      <form className="form" onSubmit={handleSubmit(onSubmitForm)}>
         {renderFormFields()}
         <h3 className="form__section-title txt-xl txt-bold">{'Photos'}</h3>
         <p className="form__section-text txt-m">{'Upload up to 4 photos'}</p>

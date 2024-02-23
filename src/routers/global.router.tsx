@@ -1,11 +1,12 @@
-import { LoginPage } from '../pages/login.page';
-import { HomePage } from '../pages/home.page';
-import { ProfilePage } from '../pages/profile.page';
 import { Route, Routes } from 'react-router-dom';
-import { NotFoundPage } from '../pages/not-found.page';
-import { ProtectedRoute } from './protected.route';
+
 import { Layout } from '../layouts/default.layout';
+import { HomePage } from '../pages/home.page';
+import { LoginPage } from '../pages/login/login.page';
+import { NotFoundPage } from '../pages/not-found.page';
+import { ProfilePage } from '../pages/profile.page';
 import { RegisterPage } from '../pages/register/register.page';
+import { ProtectedRoute } from './protected.route';
 
 export const GlobalRouter = () => {
   return (

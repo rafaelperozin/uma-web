@@ -4,7 +4,10 @@ import { FieldError, RegisterOptions, SubmitHandler, useForm } from 'react-hook-
 import { v4 as uuidv4 } from 'uuid';
 
 import { useStore } from '../../contexts/store.context';
-import { RegisterInputs, UserRegisterDto } from '../../models/register.model';
+import { RequestResponse } from '../../models/error.model';
+import { RegisterInputs } from '../../models/register.model';
+import { CreateUserRequest } from '../../models/user.model';
+// import { CreateUserRequest } from '../../models/user.model';
 import { fileSizeIsAllowed, fileTypeIsAllowed, formRules } from '../../utils/form-rules.util';
 
 export const RegisterPage = observer(() => {
@@ -18,20 +21,21 @@ export const RegisterPage = observer(() => {
   } = useStore();
   const [photoFields, setPhotoFields] = useState([{ id: uuidv4() }]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
+  const [registerStatus, setRegisterStatus] = useState<RequestResponse | null>(null);
 
-  const onSubmitForm: SubmitHandler<RegisterInputs> = data => {
-    const photosArray = Object.keys(data.photos).map((key, index) => ({
-      name: data.photoNames && data.photoNames[`photoName${index + 1}`],
-      photo: data.photos[key]
-    }));
+  const onSubmitForm: SubmitHandler<RegisterInputs> = async data => {
+    console.log('data', data);
+    const photoArray: File[] = Object.keys(data.photos).map(key => data.photos[key][0]);
+    console.log('photoArray', photoArray);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { confirmPassword, photoNames, ...dataSanitised } = data;
-    const finalData: UserRegisterDto = { ...dataSanitised, photos: photosArray };
+    const { confirmPassword, ...dataSanitised } = data;
+    const finalData: CreateUserRequest = { ...dataSanitised, photos: photoArray };
 
     console.log('finalData', finalData);
-
-    createUser(finalData);
+    const response = await createUser(finalData);
+    setRegisterStatus(response);
+    console.log(response);
   };
 
   const handleAddPhoto = () => photoFields && setPhotoFields([...photoFields, { id: uuidv4() }]);
@@ -102,6 +106,7 @@ export const RegisterPage = observer(() => {
                   return index === 0 && !value[0] ? 'The photo is required' : true;
                 },
                 checkFileType: (value: FileList) => {
+                  console.log('value', value);
                   return value[0] ? fileTypeIsAllowed(value[0].type) : true;
                 },
                 checkFileSize: (value: FileList) => {
@@ -113,28 +118,30 @@ export const RegisterPage = observer(() => {
           />
           {error && <span className="form__error photo-field__error">{`✘ ${error.message}`}</span>}
 
-          <input
+          {/* <input
             placeholder={`Photo name`}
             className="form__input photo-field__input"
             type="text"
             {...register(`photoNames.photoName${index + 1}`)}
-          />
+          /> */}
         </div>
       );
     });
 
-  return (
+  return registerStatus?.success ? (
+    <p>{registerStatus.message}</p>
+  ) : (
     <div className="register">
-      <h1 className="register__title txt-xxl text-bold">Register</h1>
-      <p className="register__text txt-m">Enter your details to register</p>
+      <h1 className="register__title txt-xxl text-bold">{'Register'}</h1>
+      <p className="register__text txt-m">{'Enter your details to register.'}</p>
       <form className="default-theme__form form" onSubmit={handleSubmit(onSubmitForm)}>
         {renderFormFields()}
-        <h3 className="form__section-title txt-xl txt-bold">Photos</h3>
-        <p className="form__section-text txt-m">Upload up to 4 photos</p>
+        <h3 className="form__section-title txt-xl txt-bold">{'Photos'}</h3>
+        <p className="form__section-text txt-m">{'Upload up to 4 photos'}</p>
         {renderPhotoFields()}
         {photoFields.length < 4 && (
-          <button className="button button--secondary" onClick={handleAddPhoto}>
-            Add photo
+          <button type="button" className="button button--secondary" onClick={handleAddPhoto}>
+            {'Add photo'}
           </button>
         )}
         <input

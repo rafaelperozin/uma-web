@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { rootStore } from '../stores/root.store';
 
-export const MULTIPART_HEADER = {
+export const headersMultipart = {
   headers: {
     'Content-Type': 'multipart/form-data'
   }
@@ -19,11 +19,6 @@ instance.interceptors.request.use(config => {
   if (user.isAuthenticated && config.headers) {
     config.headers['Authorization'] = user.userToken;
   }
-
-  // if (application.isAuthenticated && application.step === 2 && config.headers) {
-  //   console.log('Content-Type = multipart/form-data')
-  //   config.headers['Content-Type'] = 'multipart/form-data';
-  // }
 
   return config;
 });

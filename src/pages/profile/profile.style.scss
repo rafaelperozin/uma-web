@@ -25,11 +25,11 @@
     overflow: hidden;
     margin: .5rem;
 
-    &:first-child {
+    &:nth-child(3n+1) {
       margin-left: 0;
     }
 
-    &:last-child {
+    &:nth-child(3n) {
       margin-right: 0;
     }
   }

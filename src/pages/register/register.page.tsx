@@ -18,7 +18,12 @@ export const RegisterPage = observer(() => {
   const {
     user: { fullName, isAuthenticated, createUser }
   } = useStore();
-  const [photoFields, setPhotoFields] = useState([{ id: uuidv4() }]);
+  const [photoFields, setPhotoFields] = useState([
+    { id: uuidv4() },
+    { id: uuidv4() },
+    { id: uuidv4() },
+    { id: uuidv4() }
+  ]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [registerStatus, setRegisterStatus] = useState<RequestResponse | null>(null);
 
@@ -100,7 +105,7 @@ export const RegisterPage = observer(() => {
             {...register(`photos.photo${index + 1}`, {
               validate: {
                 required: (value: FileList) => {
-                  return index === 0 && !value[0] ? 'The photo is required' : true;
+                  return index < 4 && !value[0] ? 'The photo is required' : true;
                 },
                 checkFileType: (value: FileList) => {
                   return value[0] ? fileTypeIsAllowed(value[0].type) : true;
@@ -144,11 +149,9 @@ export const RegisterPage = observer(() => {
         <h3 className="form__section-title txt-xl txt-bold">{'Photos'}</h3>
         <p className="form__section-text txt-m">{'Upload up to 4 photos'}</p>
         {renderPhotoFields()}
-        {photoFields.length < 4 && (
-          <button type="button" className="button button--secondary" onClick={handleAddPhoto}>
-            {'Add photo'}
-          </button>
-        )}
+        <button type="button" className="button button--secondary" onClick={handleAddPhoto}>
+          {'Add photo'}
+        </button>
         <input
           className="button button--primary form__button form__button--primary"
           type="submit"

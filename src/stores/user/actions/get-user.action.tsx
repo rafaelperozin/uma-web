@@ -6,9 +6,7 @@ import { UserResponse } from '../../../models/user.model';
 export const getUserAction = (self: any) =>
   function* () {
     try {
-      console.log('START getUserAction');
       const response: AxiosResponse<UserResponse> = yield apiConnect.get('/user/me');
-      console.log('getUserAction', response.data);
       self.setUser(response.data);
       return {
         success: true,
